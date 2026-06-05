@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package user.v1;
+
+import "common/v1/common.proto";
+
+option go_package = "github.com/alexgul25/protos/gen/go/user/v1;userv1";
+
+service UserService {
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc GetMyProfile(GetMyProfileRequest) returns (ProfileResponse);
+  rpc Subscribe(SubscribeRequest) returns (common.v1.Empty);
+  rpc Unsubscribe(UnsubscribeRequest) returns (common.v1.Empty);
+  rpc GetFollowers(GetFollowersRequest) returns (GetFollowersResponse);
+}
+
+message RegisterRequest {
+  string email = 1;
+  string password = 2;
+  string display_name = 3;
+}
+
+message RegisterResponse {
+  string user_id = 1;
+  string email = 2;
+  string display_name = 3;
+  string created_at = 4;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string access_token = 1;
+}
+
+message GetMyProfileRequest {}
+
+message ProfileResponse {
+  string user_id = 1;
+  string email = 2;
+  string display_name = 3;
+  string created_at = 4;
+}
+
+message SubscribeRequest {
+  string followee_id = 1;   // ID пользователя, на которого подписываемся
+}
+
+message UnsubscribeRequest {
+  string followee_id = 1;
+}
+
+message GetFollowersRequest {
+  string user_id = 1;       // ID пользователя, чьих подписчиков запрашивают
+}
+
+message GetFollowersResponse {
+  repeated string follower_ids = 1;
+}
