@@ -482,16 +482,76 @@ func (x *GetFollowersRequest) GetUserId() string {
 	return ""
 }
 
+type Follower struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	DisplayName   string                 `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Follower) Reset() {
+	*x = Follower{}
+	mi := &file_user_v1_user_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Follower) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Follower) ProtoMessage() {}
+
+func (x *Follower) ProtoReflect() protoreflect.Message {
+	mi := &file_user_v1_user_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Follower.ProtoReflect.Descriptor instead.
+func (*Follower) Descriptor() ([]byte, []int) {
+	return file_user_v1_user_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *Follower) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *Follower) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *Follower) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
 type GetFollowersResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	FollowerIds   []string               `protobuf:"bytes,1,rep,name=follower_ids,json=followerIds,proto3" json:"follower_ids,omitempty"`
+	Followers     []*Follower            `protobuf:"bytes,1,rep,name=followers,proto3" json:"followers,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetFollowersResponse) Reset() {
 	*x = GetFollowersResponse{}
-	mi := &file_user_v1_user_service_proto_msgTypes[9]
+	mi := &file_user_v1_user_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -503,7 +563,7 @@ func (x *GetFollowersResponse) String() string {
 func (*GetFollowersResponse) ProtoMessage() {}
 
 func (x *GetFollowersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_v1_user_service_proto_msgTypes[9]
+	mi := &file_user_v1_user_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -516,12 +576,12 @@ func (x *GetFollowersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetFollowersResponse.ProtoReflect.Descriptor instead.
 func (*GetFollowersResponse) Descriptor() ([]byte, []int) {
-	return file_user_v1_user_service_proto_rawDescGZIP(), []int{9}
+	return file_user_v1_user_service_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *GetFollowersResponse) GetFollowerIds() []string {
+func (x *GetFollowersResponse) GetFollowers() []*Follower {
 	if x != nil {
-		return x.FollowerIds
+		return x.Followers
 	}
 	return nil
 }
@@ -560,9 +620,13 @@ const file_user_v1_user_service_proto_rawDesc = "" +
 	"\vfollowee_id\x18\x01 \x01(\tR\n" +
 	"followeeId\".\n" +
 	"\x13GetFollowersRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"9\n" +
-	"\x14GetFollowersResponse\x12!\n" +
-	"\ffollower_ids\x18\x01 \x03(\tR\vfollowerIds2\x93\x03\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"\\\n" +
+	"\bFollower\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12!\n" +
+	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x12\x14\n" +
+	"\x05email\x18\x03 \x01(\tR\x05email\"G\n" +
+	"\x14GetFollowersResponse\x12/\n" +
+	"\tfollowers\x18\x01 \x03(\v2\x11.user.v1.FollowerR\tfollowers2\x93\x03\n" +
 	"\vUserService\x12?\n" +
 	"\bRegister\x12\x18.user.v1.RegisterRequest\x1a\x19.user.v1.RegisterResponse\x126\n" +
 	"\x05Login\x12\x15.user.v1.LoginRequest\x1a\x16.user.v1.LoginResponse\x12F\n" +
@@ -583,7 +647,7 @@ func file_user_v1_user_service_proto_rawDescGZIP() []byte {
 	return file_user_v1_user_service_proto_rawDescData
 }
 
-var file_user_v1_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_user_v1_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_user_v1_user_service_proto_goTypes = []any{
 	(*RegisterRequest)(nil),      // 0: user.v1.RegisterRequest
 	(*RegisterResponse)(nil),     // 1: user.v1.RegisterResponse
@@ -594,27 +658,29 @@ var file_user_v1_user_service_proto_goTypes = []any{
 	(*SubscribeRequest)(nil),     // 6: user.v1.SubscribeRequest
 	(*UnsubscribeRequest)(nil),   // 7: user.v1.UnsubscribeRequest
 	(*GetFollowersRequest)(nil),  // 8: user.v1.GetFollowersRequest
-	(*GetFollowersResponse)(nil), // 9: user.v1.GetFollowersResponse
-	(*v1.Empty)(nil),             // 10: common.v1.Empty
+	(*Follower)(nil),             // 9: user.v1.Follower
+	(*GetFollowersResponse)(nil), // 10: user.v1.GetFollowersResponse
+	(*v1.Empty)(nil),             // 11: common.v1.Empty
 }
 var file_user_v1_user_service_proto_depIdxs = []int32{
-	0,  // 0: user.v1.UserService.Register:input_type -> user.v1.RegisterRequest
-	2,  // 1: user.v1.UserService.Login:input_type -> user.v1.LoginRequest
-	4,  // 2: user.v1.UserService.GetMyProfile:input_type -> user.v1.GetMyProfileRequest
-	6,  // 3: user.v1.UserService.Subscribe:input_type -> user.v1.SubscribeRequest
-	7,  // 4: user.v1.UserService.Unsubscribe:input_type -> user.v1.UnsubscribeRequest
-	8,  // 5: user.v1.UserService.GetFollowers:input_type -> user.v1.GetFollowersRequest
-	1,  // 6: user.v1.UserService.Register:output_type -> user.v1.RegisterResponse
-	3,  // 7: user.v1.UserService.Login:output_type -> user.v1.LoginResponse
-	5,  // 8: user.v1.UserService.GetMyProfile:output_type -> user.v1.ProfileResponse
-	10, // 9: user.v1.UserService.Subscribe:output_type -> common.v1.Empty
-	10, // 10: user.v1.UserService.Unsubscribe:output_type -> common.v1.Empty
-	9,  // 11: user.v1.UserService.GetFollowers:output_type -> user.v1.GetFollowersResponse
-	6,  // [6:12] is the sub-list for method output_type
-	0,  // [0:6] is the sub-list for method input_type
-	0,  // [0:0] is the sub-list for extension type_name
-	0,  // [0:0] is the sub-list for extension extendee
-	0,  // [0:0] is the sub-list for field type_name
+	9,  // 0: user.v1.GetFollowersResponse.followers:type_name -> user.v1.Follower
+	0,  // 1: user.v1.UserService.Register:input_type -> user.v1.RegisterRequest
+	2,  // 2: user.v1.UserService.Login:input_type -> user.v1.LoginRequest
+	4,  // 3: user.v1.UserService.GetMyProfile:input_type -> user.v1.GetMyProfileRequest
+	6,  // 4: user.v1.UserService.Subscribe:input_type -> user.v1.SubscribeRequest
+	7,  // 5: user.v1.UserService.Unsubscribe:input_type -> user.v1.UnsubscribeRequest
+	8,  // 6: user.v1.UserService.GetFollowers:input_type -> user.v1.GetFollowersRequest
+	1,  // 7: user.v1.UserService.Register:output_type -> user.v1.RegisterResponse
+	3,  // 8: user.v1.UserService.Login:output_type -> user.v1.LoginResponse
+	5,  // 9: user.v1.UserService.GetMyProfile:output_type -> user.v1.ProfileResponse
+	11, // 10: user.v1.UserService.Subscribe:output_type -> common.v1.Empty
+	11, // 11: user.v1.UserService.Unsubscribe:output_type -> common.v1.Empty
+	10, // 12: user.v1.UserService.GetFollowers:output_type -> user.v1.GetFollowersResponse
+	7,  // [7:13] is the sub-list for method output_type
+	1,  // [1:7] is the sub-list for method input_type
+	1,  // [1:1] is the sub-list for extension type_name
+	1,  // [1:1] is the sub-list for extension extendee
+	0,  // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_user_v1_user_service_proto_init() }
@@ -628,7 +694,7 @@ func file_user_v1_user_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_v1_user_service_proto_rawDesc), len(file_user_v1_user_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

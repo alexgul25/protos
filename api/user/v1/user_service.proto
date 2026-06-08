@@ -58,6 +58,12 @@ message GetFollowersRequest {
   string user_id = 1;       // ID пользователя, чьих подписчиков запрашивают
 }
 
+message Follower {
+  string user_id = 1;
+  string display_name = 2;
+  string email = 3;
+}
+
 message GetFollowersResponse {
-  repeated string follower_ids = 1;
+  repeated Follower followers = 1;
 }
