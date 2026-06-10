@@ -1,5 +1,6 @@
 PROTO_BASE := api
 GEN_DIR := gen/go
+PROTOSET_OUT := user_service_v1.protoset
 
 .PHONY: generate
 generate:
@@ -13,6 +14,15 @@ generate:
 		$(PROTO_BASE)/common/v1/common.proto \
 		$(PROTO_BASE)/user/v1/user_service.proto
 
+.PHONY: protoset
+protoset:
+	protoc \
+		-I $(PROTO_BASE) \
+		--include_imports \
+		--descriptor_set_out=$(PROTOSET_OUT) \
+		$(PROTO_BASE)/user/v1/user_service.proto
+
+
 .PHONY: clean
 clean:
-	rm -rf $(GEN_DIR)
+	rm -rf $(GEN_DIR) $(PROTOSET_OUT)
