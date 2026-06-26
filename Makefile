@@ -11,7 +11,6 @@ generate:
 		--go_opt=paths=source_relative \
 		--go-grpc_out=$(GEN_DIR) \
 		--go-grpc_opt=paths=source_relative \
-		$(PROTO_BASE)/common/v1/common.proto \
 		$(PROTO_BASE)/user/v1/user_service.proto
 
 .PHONY: protoset

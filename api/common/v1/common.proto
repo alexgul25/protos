@@ -1,7 +1,0 @@
-syntax = "proto3";
-
-package common.v1;
-
-option go_package = "github.com/alexgul25/protos/gen/go/common/v1;commonv1";
-
-message Empty {}
