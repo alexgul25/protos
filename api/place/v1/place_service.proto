@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package place.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/alexgul25/protos/gen/go/place/v1;placev1";
+
+service PlaceService {
+    rpc AddPlace (AddPlaceRequest) returns (AddPlaceResponse);
+    rpc GetUserPlaces (GetUserPlacesRequest) returns (GetUserPlacesResponse);
+}
+
+// ADD PLACE
+message AddPlaceRequest {
+    string name = 1;
+    string info = 2;
+}
+
+message AddPlaceResponse {
+    string id = 1;
+    string user_id = 2;
+    string name = 3;
+    string info = 4;
+    google.protobuf.Timestamp created_at = 5;
+}
+
+// GET USER PLACES
+message GetUserPlacesRequest {
+    string user_id = 1;
+}
+
+message Place {
+    string name = 1;
+    string info = 2;
+    google.protobuf.Timestamp created_at = 3;
+}
+
+message GetUserPlacesResponse {
+    repeated Place places = 1;
+}
