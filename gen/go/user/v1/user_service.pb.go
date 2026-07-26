@@ -557,6 +557,155 @@ func (x *GetFollowersResponse) GetFollowers() []*Follower {
 	return nil
 }
 
+// FIND USERS BY DISPLAY NAME
+type FindUsersByDisplayNameRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SearchQuery   string                 `protobuf:"bytes,1,opt,name=search_query,json=searchQuery,proto3" json:"search_query,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FindUsersByDisplayNameRequest) Reset() {
+	*x = FindUsersByDisplayNameRequest{}
+	mi := &file_user_v1_user_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FindUsersByDisplayNameRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FindUsersByDisplayNameRequest) ProtoMessage() {}
+
+func (x *FindUsersByDisplayNameRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_v1_user_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FindUsersByDisplayNameRequest.ProtoReflect.Descriptor instead.
+func (*FindUsersByDisplayNameRequest) Descriptor() ([]byte, []int) {
+	return file_user_v1_user_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *FindUsersByDisplayNameRequest) GetSearchQuery() string {
+	if x != nil {
+		return x.SearchQuery
+	}
+	return ""
+}
+
+type User struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	DisplayName   string                 `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *User) Reset() {
+	*x = User{}
+	mi := &file_user_v1_user_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *User) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*User) ProtoMessage() {}
+
+func (x *User) ProtoReflect() protoreflect.Message {
+	mi := &file_user_v1_user_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use User.ProtoReflect.Descriptor instead.
+func (*User) Descriptor() ([]byte, []int) {
+	return file_user_v1_user_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *User) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *User) GetDisplayName() string {
+	if x != nil {
+		return x.DisplayName
+	}
+	return ""
+}
+
+func (x *User) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type FindUsersByDisplayNameResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Users         []*User                `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FindUsersByDisplayNameResponse) Reset() {
+	*x = FindUsersByDisplayNameResponse{}
+	mi := &file_user_v1_user_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FindUsersByDisplayNameResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FindUsersByDisplayNameResponse) ProtoMessage() {}
+
+func (x *FindUsersByDisplayNameResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_v1_user_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FindUsersByDisplayNameResponse.ProtoReflect.Descriptor instead.
+func (*FindUsersByDisplayNameResponse) Descriptor() ([]byte, []int) {
+	return file_user_v1_user_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *FindUsersByDisplayNameResponse) GetUsers() []*User {
+	if x != nil {
+		return x.Users
+	}
+	return nil
+}
+
 var File_user_v1_user_service_proto protoreflect.FileDescriptor
 
 const file_user_v1_user_service_proto_rawDesc = "" +
@@ -596,14 +745,24 @@ const file_user_v1_user_service_proto_rawDesc = "" +
 	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\"G\n" +
 	"\x14GetFollowersResponse\x12/\n" +
-	"\tfollowers\x18\x01 \x03(\v2\x11.user.v1.FollowerR\tfollowers2\x9e\x03\n" +
+	"\tfollowers\x18\x01 \x03(\v2\x11.user.v1.FollowerR\tfollowers\"B\n" +
+	"\x1dFindUsersByDisplayNameRequest\x12!\n" +
+	"\fsearch_query\x18\x01 \x01(\tR\vsearchQuery\"}\n" +
+	"\x04User\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12!\n" +
+	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x129\n" +
+	"\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"E\n" +
+	"\x1eFindUsersByDisplayNameResponse\x12#\n" +
+	"\x05users\x18\x01 \x03(\v2\r.user.v1.UserR\x05users2\x89\x04\n" +
 	"\vUserService\x12?\n" +
 	"\bRegister\x12\x18.user.v1.RegisterRequest\x1a\x19.user.v1.RegisterResponse\x126\n" +
 	"\x05Login\x12\x15.user.v1.LoginRequest\x1a\x16.user.v1.LoginResponse\x12E\n" +
 	"\fGetMyProfile\x12\x16.google.protobuf.Empty\x1a\x1d.user.v1.GetMyProfileResponse\x12>\n" +
 	"\tSubscribe\x12\x19.user.v1.SubscribeRequest\x1a\x16.google.protobuf.Empty\x12B\n" +
 	"\vUnsubscribe\x12\x1b.user.v1.UnsubscribeRequest\x1a\x16.google.protobuf.Empty\x12K\n" +
-	"\fGetFollowers\x12\x1c.user.v1.GetFollowersRequest\x1a\x1d.user.v1.GetFollowersResponseB3Z1github.com/alexgul25/protos/gen/go/user/v1;userv1b\x06proto3"
+	"\fGetFollowers\x12\x1c.user.v1.GetFollowersRequest\x1a\x1d.user.v1.GetFollowersResponse\x12i\n" +
+	"\x16FindUsersByDisplayName\x12&.user.v1.FindUsersByDisplayNameRequest\x1a'.user.v1.FindUsersByDisplayNameResponseB3Z1github.com/alexgul25/protos/gen/go/user/v1;userv1b\x06proto3"
 
 var (
 	file_user_v1_user_service_proto_rawDescOnce sync.Once
@@ -617,42 +776,49 @@ func file_user_v1_user_service_proto_rawDescGZIP() []byte {
 	return file_user_v1_user_service_proto_rawDescData
 }
 
-var file_user_v1_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_user_v1_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_user_v1_user_service_proto_goTypes = []any{
-	(*RegisterRequest)(nil),       // 0: user.v1.RegisterRequest
-	(*RegisterResponse)(nil),      // 1: user.v1.RegisterResponse
-	(*LoginRequest)(nil),          // 2: user.v1.LoginRequest
-	(*LoginResponse)(nil),         // 3: user.v1.LoginResponse
-	(*GetMyProfileResponse)(nil),  // 4: user.v1.GetMyProfileResponse
-	(*SubscribeRequest)(nil),      // 5: user.v1.SubscribeRequest
-	(*UnsubscribeRequest)(nil),    // 6: user.v1.UnsubscribeRequest
-	(*GetFollowersRequest)(nil),   // 7: user.v1.GetFollowersRequest
-	(*Follower)(nil),              // 8: user.v1.Follower
-	(*GetFollowersResponse)(nil),  // 9: user.v1.GetFollowersResponse
-	(*timestamppb.Timestamp)(nil), // 10: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),         // 11: google.protobuf.Empty
+	(*RegisterRequest)(nil),                // 0: user.v1.RegisterRequest
+	(*RegisterResponse)(nil),               // 1: user.v1.RegisterResponse
+	(*LoginRequest)(nil),                   // 2: user.v1.LoginRequest
+	(*LoginResponse)(nil),                  // 3: user.v1.LoginResponse
+	(*GetMyProfileResponse)(nil),           // 4: user.v1.GetMyProfileResponse
+	(*SubscribeRequest)(nil),               // 5: user.v1.SubscribeRequest
+	(*UnsubscribeRequest)(nil),             // 6: user.v1.UnsubscribeRequest
+	(*GetFollowersRequest)(nil),            // 7: user.v1.GetFollowersRequest
+	(*Follower)(nil),                       // 8: user.v1.Follower
+	(*GetFollowersResponse)(nil),           // 9: user.v1.GetFollowersResponse
+	(*FindUsersByDisplayNameRequest)(nil),  // 10: user.v1.FindUsersByDisplayNameRequest
+	(*User)(nil),                           // 11: user.v1.User
+	(*FindUsersByDisplayNameResponse)(nil), // 12: user.v1.FindUsersByDisplayNameResponse
+	(*timestamppb.Timestamp)(nil),          // 13: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),                  // 14: google.protobuf.Empty
 }
 var file_user_v1_user_service_proto_depIdxs = []int32{
-	10, // 0: user.v1.RegisterResponse.created_at:type_name -> google.protobuf.Timestamp
-	10, // 1: user.v1.GetMyProfileResponse.created_at:type_name -> google.protobuf.Timestamp
+	13, // 0: user.v1.RegisterResponse.created_at:type_name -> google.protobuf.Timestamp
+	13, // 1: user.v1.GetMyProfileResponse.created_at:type_name -> google.protobuf.Timestamp
 	8,  // 2: user.v1.GetFollowersResponse.followers:type_name -> user.v1.Follower
-	0,  // 3: user.v1.UserService.Register:input_type -> user.v1.RegisterRequest
-	2,  // 4: user.v1.UserService.Login:input_type -> user.v1.LoginRequest
-	11, // 5: user.v1.UserService.GetMyProfile:input_type -> google.protobuf.Empty
-	5,  // 6: user.v1.UserService.Subscribe:input_type -> user.v1.SubscribeRequest
-	6,  // 7: user.v1.UserService.Unsubscribe:input_type -> user.v1.UnsubscribeRequest
-	7,  // 8: user.v1.UserService.GetFollowers:input_type -> user.v1.GetFollowersRequest
-	1,  // 9: user.v1.UserService.Register:output_type -> user.v1.RegisterResponse
-	3,  // 10: user.v1.UserService.Login:output_type -> user.v1.LoginResponse
-	4,  // 11: user.v1.UserService.GetMyProfile:output_type -> user.v1.GetMyProfileResponse
-	11, // 12: user.v1.UserService.Subscribe:output_type -> google.protobuf.Empty
-	11, // 13: user.v1.UserService.Unsubscribe:output_type -> google.protobuf.Empty
-	9,  // 14: user.v1.UserService.GetFollowers:output_type -> user.v1.GetFollowersResponse
-	9,  // [9:15] is the sub-list for method output_type
-	3,  // [3:9] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	13, // 3: user.v1.User.created_at:type_name -> google.protobuf.Timestamp
+	11, // 4: user.v1.FindUsersByDisplayNameResponse.users:type_name -> user.v1.User
+	0,  // 5: user.v1.UserService.Register:input_type -> user.v1.RegisterRequest
+	2,  // 6: user.v1.UserService.Login:input_type -> user.v1.LoginRequest
+	14, // 7: user.v1.UserService.GetMyProfile:input_type -> google.protobuf.Empty
+	5,  // 8: user.v1.UserService.Subscribe:input_type -> user.v1.SubscribeRequest
+	6,  // 9: user.v1.UserService.Unsubscribe:input_type -> user.v1.UnsubscribeRequest
+	7,  // 10: user.v1.UserService.GetFollowers:input_type -> user.v1.GetFollowersRequest
+	10, // 11: user.v1.UserService.FindUsersByDisplayName:input_type -> user.v1.FindUsersByDisplayNameRequest
+	1,  // 12: user.v1.UserService.Register:output_type -> user.v1.RegisterResponse
+	3,  // 13: user.v1.UserService.Login:output_type -> user.v1.LoginResponse
+	4,  // 14: user.v1.UserService.GetMyProfile:output_type -> user.v1.GetMyProfileResponse
+	14, // 15: user.v1.UserService.Subscribe:output_type -> google.protobuf.Empty
+	14, // 16: user.v1.UserService.Unsubscribe:output_type -> google.protobuf.Empty
+	9,  // 17: user.v1.UserService.GetFollowers:output_type -> user.v1.GetFollowersResponse
+	12, // 18: user.v1.UserService.FindUsersByDisplayName:output_type -> user.v1.FindUsersByDisplayNameResponse
+	12, // [12:19] is the sub-list for method output_type
+	5,  // [5:12] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_user_v1_user_service_proto_init() }
@@ -666,7 +832,7 @@ func file_user_v1_user_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_v1_user_service_proto_rawDesc), len(file_user_v1_user_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

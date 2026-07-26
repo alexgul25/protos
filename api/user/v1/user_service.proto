@@ -8,67 +8,83 @@ import "google/protobuf/timestamp.proto";
 option go_package = "github.com/alexgul25/protos/gen/go/user/v1;userv1";
 
 service UserService {
-  rpc Register(RegisterRequest) returns (RegisterResponse);
-  rpc Login(LoginRequest) returns (LoginResponse);
-  rpc GetMyProfile(google.protobuf.Empty) returns (GetMyProfileResponse);
-  rpc Subscribe(SubscribeRequest) returns (google.protobuf.Empty);
-  rpc Unsubscribe(UnsubscribeRequest) returns (google.protobuf.Empty);
-  rpc GetFollowers(GetFollowersRequest) returns (GetFollowersResponse);
+    rpc Register(RegisterRequest) returns (RegisterResponse);
+    rpc Login(LoginRequest) returns (LoginResponse);
+    rpc GetMyProfile(google.protobuf.Empty) returns (GetMyProfileResponse);
+    rpc Subscribe(SubscribeRequest) returns (google.protobuf.Empty);
+    rpc Unsubscribe(UnsubscribeRequest) returns (google.protobuf.Empty);
+    rpc GetFollowers(GetFollowersRequest) returns (GetFollowersResponse);
+    rpc FindUsersByDisplayName(FindUsersByDisplayNameRequest) returns (FindUsersByDisplayNameResponse);
 }
 
 // REGISTER
 message RegisterRequest {
-  string email = 1;
-  string password = 2;
-  string display_name = 3;
+    string email = 1;
+    string password = 2;
+    string display_name = 3;
 }
 
 message RegisterResponse {
-  string user_id = 1;
-  string email = 2;
-  string display_name = 3;
-  google.protobuf.Timestamp created_at = 4;
+    string user_id = 1;
+    string email = 2;
+    string display_name = 3;
+    google.protobuf.Timestamp created_at = 4;
 }
 
 // LOGIN
 message LoginRequest {
-  string email = 1;
-  string password = 2;
+    string email = 1;
+    string password = 2;
 }
 
 message LoginResponse {
-  string access_token = 1;
+    string access_token = 1;
 }
 
 // GET MY PROFILE
 message GetMyProfileResponse {
-  string user_id = 1;
-  string email = 2;
-  string display_name = 3;
-  google.protobuf.Timestamp created_at = 4;
+    string user_id = 1;
+    string email = 2;
+    string display_name = 3;
+    google.protobuf.Timestamp created_at = 4;
 }
 
 // SUBSCRIBE
 message SubscribeRequest {
-  string followee_id = 1;   // ID пользователя, на которого подписываемся
+    string followee_id = 1;   // ID пользователя, на которого подписываемся
 }
 
 // UNSUBSCRIBE
 message UnsubscribeRequest {
-  string followee_id = 1;
+    string followee_id = 1;
 }
 
 // GET FOLLOWERS
 message GetFollowersRequest {
-  string user_id = 1;       // ID пользователя, чьих подписчиков запрашивают
+    string user_id = 1;       // ID пользователя, чьих подписчиков запрашивают
 }
 
 message Follower {
-  string user_id = 1;
-  string display_name = 2;
-  string email = 3;
+    string user_id = 1;
+    string display_name = 2;
+    string email = 3;
 }
 
 message GetFollowersResponse {
-  repeated Follower followers = 1;
+    repeated Follower followers = 1;
+}
+
+// FIND USERS BY DISPLAY NAME
+message FindUsersByDisplayNameRequest {
+    string search_query = 1;
+}
+
+message User {
+    string user_id = 1;
+    string display_name = 2;
+    google.protobuf.Timestamp created_at = 3;
+}
+
+message FindUsersByDisplayNameResponse {
+    repeated User users = 1;
 }
