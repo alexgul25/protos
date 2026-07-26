@@ -20,12 +20,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserService_Register_FullMethodName     = "/user.v1.UserService/Register"
-	UserService_Login_FullMethodName        = "/user.v1.UserService/Login"
-	UserService_GetMyProfile_FullMethodName = "/user.v1.UserService/GetMyProfile"
-	UserService_Subscribe_FullMethodName    = "/user.v1.UserService/Subscribe"
-	UserService_Unsubscribe_FullMethodName  = "/user.v1.UserService/Unsubscribe"
-	UserService_GetFollowers_FullMethodName = "/user.v1.UserService/GetFollowers"
+	UserService_Register_FullMethodName               = "/user.v1.UserService/Register"
+	UserService_Login_FullMethodName                  = "/user.v1.UserService/Login"
+	UserService_GetMyProfile_FullMethodName           = "/user.v1.UserService/GetMyProfile"
+	UserService_Subscribe_FullMethodName              = "/user.v1.UserService/Subscribe"
+	UserService_Unsubscribe_FullMethodName            = "/user.v1.UserService/Unsubscribe"
+	UserService_GetFollowers_FullMethodName           = "/user.v1.UserService/GetFollowers"
+	UserService_FindUsersByDisplayName_FullMethodName = "/user.v1.UserService/FindUsersByDisplayName"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -38,6 +39,7 @@ type UserServiceClient interface {
 	Subscribe(ctx context.Context, in *SubscribeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Unsubscribe(ctx context.Context, in *UnsubscribeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetFollowers(ctx context.Context, in *GetFollowersRequest, opts ...grpc.CallOption) (*GetFollowersResponse, error)
+	FindUsersByDisplayName(ctx context.Context, in *FindUsersByDisplayNameRequest, opts ...grpc.CallOption) (*FindUsersByDisplayNameResponse, error)
 }
 
 type userServiceClient struct {
@@ -108,6 +110,16 @@ func (c *userServiceClient) GetFollowers(ctx context.Context, in *GetFollowersRe
 	return out, nil
 }
 
+func (c *userServiceClient) FindUsersByDisplayName(ctx context.Context, in *FindUsersByDisplayNameRequest, opts ...grpc.CallOption) (*FindUsersByDisplayNameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FindUsersByDisplayNameResponse)
+	err := c.cc.Invoke(ctx, UserService_FindUsersByDisplayName_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
@@ -118,6 +130,7 @@ type UserServiceServer interface {
 	Subscribe(context.Context, *SubscribeRequest) (*emptypb.Empty, error)
 	Unsubscribe(context.Context, *UnsubscribeRequest) (*emptypb.Empty, error)
 	GetFollowers(context.Context, *GetFollowersRequest) (*GetFollowersResponse, error)
+	FindUsersByDisplayName(context.Context, *FindUsersByDisplayNameRequest) (*FindUsersByDisplayNameResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -145,6 +158,9 @@ func (UnimplementedUserServiceServer) Unsubscribe(context.Context, *UnsubscribeR
 }
 func (UnimplementedUserServiceServer) GetFollowers(context.Context, *GetFollowersRequest) (*GetFollowersResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetFollowers not implemented")
+}
+func (UnimplementedUserServiceServer) FindUsersByDisplayName(context.Context, *FindUsersByDisplayNameRequest) (*FindUsersByDisplayNameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FindUsersByDisplayName not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 func (UnimplementedUserServiceServer) testEmbeddedByValue()                     {}
@@ -275,6 +291,24 @@ func _UserService_GetFollowers_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_FindUsersByDisplayName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FindUsersByDisplayNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).FindUsersByDisplayName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_FindUsersByDisplayName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).FindUsersByDisplayName(ctx, req.(*FindUsersByDisplayNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -305,6 +339,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetFollowers",
 			Handler:    _UserService_GetFollowers_Handler,
+		},
+		{
+			MethodName: "FindUsersByDisplayName",
+			Handler:    _UserService_FindUsersByDisplayName_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
