@@ -12,10 +12,10 @@
 
 **Protos** - единый источник правды для gRPC-контрактов. Содержит `.proto`-файлы и сгенерированный по ним код, который импортируют остальные микросервисы.
 
-:globe_with_meridians: [Gateway Service](https://github.com/alexgul25/gateway-svc) - gRPC-клиенты для **Place Service** и **User Service**.
+:globe_with_meridians: **[Gateway Service](https://github.com/alexgul25/gateway-svc)** - gRPC-клиенты для **Place Service** и **User Service**.
 
-:round_pushpin: [Place Service](https://github.com/alexgul25/place-svc) - соответствующий gRPC-сервер.
+:round_pushpin: **[Place Service](https://github.com/alexgul25/place-svc)** - соответствующий gRPC-сервер.
 
-:busts_in_silhouette: [User Service](https://github.com/alexgul25/user-svc) - соответствующий gRPC-сервер.
+:busts_in_silhouette: **[User Service](https://github.com/alexgul25/user-svc)** - соответствующий gRPC-сервер.
 
 :bell: **[Notify Service](https://github.com/alexgul25/notify-svc)** - gRPC-клиент для **User Service**.
