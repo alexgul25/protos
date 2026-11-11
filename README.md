@@ -1,10 +1,10 @@
 # :scroll: Protos
 
-Публичный репозиторий для проекта **Date Wishlist Hub**.  
+Публичный репозиторий для проекта **НамТуда**.  
 
-Ссылка на центральный репозиторий проекта: **[Date Wishlist Hub Deploy](https://github.com/alexgul25/date-wishlist-hub-deploy)**
+Ссылка на центральный репозиторий проекта: **[НамТуда](https://github.com/alexgul25/namtuda)**
 
-Ссылка на канбан-доску проекта: **[Date Wishlist Hub - Development](https://github.com/users/alexgul25/projects/2)**
+Ссылка на канбан-доску проекта: **[НамТуда - Разработка](https://github.com/users/alexgul25/projects/2)**
 
 *Стек технологий репозитория:* `Go`  `Protobuf`
 
